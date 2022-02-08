@@ -11,15 +11,17 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class Quiz extends JFrame {
+public class Quiz extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-
+	private JButton faculty,student;
 	/**
 	 * Launch the application.
 	 */
@@ -60,17 +62,19 @@ public class Quiz extends JFrame {
 		
 		//Button that will open a screen related to faculty
 		ImageIcon teacherIcon = new ImageIcon("src/icons/teacher.png");
-		JButton btnNewButton = new JButton(teacherIcon);
-		btnNewButton.setBackground(Color.WHITE);
-		btnNewButton.setBounds(382, 692, 127, 120);
-		contentPane.add(btnNewButton);
+		faculty = new JButton(teacherIcon);
+		faculty.setBackground(Color.WHITE);
+		faculty.setBounds(382, 692, 127, 120);
+		faculty.addActionListener(this);
+		contentPane.add(faculty);
 		
 		//Button that will open a screen related to Student
 		ImageIcon studentIcon = new ImageIcon("src/icons/reading.png");
-		JButton btnNewButton_1 = new JButton(studentIcon);
-		btnNewButton_1.setBackground(Color.WHITE);
-		btnNewButton_1.setBounds(630, 692, 127, 120);
-		contentPane.add(btnNewButton_1);
+		student = new JButton(studentIcon);
+		student.setBackground(Color.WHITE);
+		student.setBounds(630, 692, 127, 120);
+		student.addActionListener(this);
+		contentPane.add(student);
 		
 		//Just a label displaying text
 		JLabel lblNewLabel_1 = new JLabel("Are You...");
@@ -80,5 +84,15 @@ public class Quiz extends JFrame {
 		lblNewLabel_1.setBackground(Color.WHITE);
 		lblNewLabel_1.setBounds(80, 582, 1044, 74);
 		contentPane.add(lblNewLabel_1);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// Open the screen when button is clicked for either student and faculty
+		
+		if(e.getSource()==faculty) {
+			this.setVisible(false);
+			new Faculty().setVisible(true);
+		}
 	}
 }
